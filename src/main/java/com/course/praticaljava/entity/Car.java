@@ -13,9 +13,13 @@ public class Car {
 
   private String color;
 
+  private Engine engine;
+
   private LocalDate firstReleaseDate;
 
   private int price;
+
+  private List<Tire> tires;
 
   private String type;
 
@@ -42,6 +46,10 @@ public class Car {
     return color;
   }
 
+  public Engine getEngine() {
+    return engine;
+  }
+
   public LocalDate getFirstReleaseDate() {
     return firstReleaseDate;
   }
@@ -50,9 +58,15 @@ public class Car {
     return price;
   }
 
+  public List<Tire> getTires() {
+    return tires;
+  }
+
   public String getType() {
     return type;
   }
+
+
 
   public boolean isAvailable() {
     return available;
@@ -61,8 +75,6 @@ public class Car {
   public void setAdditionalFeatures(List<String> additionalFeatures) {
     this.additionalFeatures = additionalFeatures;
   }
-
-
 
   public void setAvailable(boolean available) {
     this.available = available;
@@ -76,12 +88,22 @@ public class Car {
     this.color = color;
   }
 
+  public void setEngine(Engine engine) {
+    this.engine = engine;
+  }
+
+
+
   public void setFirstReleaseDate(LocalDate firstReleaseDate) {
     this.firstReleaseDate = firstReleaseDate;
   }
 
   public void setPrice(int price) {
     this.price = price;
+  }
+
+  public void setTires(List<Tire> tires) {
+    this.tires = tires;
   }
 
   public void setType(String type) {
