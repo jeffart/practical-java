@@ -3,8 +3,24 @@ package com.course.praticaljava.entity;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
+@Document(indexName = "practical-java")
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Car {
 
+  @JsonInclude(value = Include.NON_EMPTY)
   private List<String> additionalFeatures;
 
   private boolean available;
@@ -13,11 +29,20 @@ public class Car {
 
   private String color;
 
+  @JsonUnwrapped
   private Engine engine;
 
+  @Field(type = FieldType.Date, format = DateFormat.date)
+  @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Europe/Paris")
   private LocalDate firstReleaseDate;
 
+  @Id
+  private String id;
+
   private int price;
+
+  @JsonInclude(value = Include.NON_EMPTY)
+  private String secretFeature;
 
   private List<Tire> tires;
 
@@ -38,6 +63,8 @@ public class Car {
     return additionalFeatures;
   }
 
+
+
   public String getBrand() {
     return brand;
   }
@@ -54,8 +81,16 @@ public class Car {
     return firstReleaseDate;
   }
 
+  public String getId() {
+    return id;
+  }
+
   public int getPrice() {
     return price;
+  }
+
+  public String getSecretFeature() {
+    return secretFeature;
   }
 
   public List<Tire> getTires() {
@@ -98,9 +133,19 @@ public class Car {
     this.firstReleaseDate = firstReleaseDate;
   }
 
+  public void setId(String id) {
+    this.id = id;
+  }
+
   public void setPrice(int price) {
     this.price = price;
   }
+
+  public void setSecretFeature(String secretFeature) {
+    this.secretFeature = secretFeature;
+  }
+
+
 
   public void setTires(List<Tire> tires) {
     this.tires = tires;
@@ -112,9 +157,14 @@ public class Car {
 
   @Override
   public String toString() {
-    return "Car [brand=" + brand + ", color=" + color + ", type=" + type + ", price=" + price + ", available="
-        + available + ", firstReleaseDate=" + firstReleaseDate + "]";
+    return "Car [additionalFeatures=" + additionalFeatures + ", secretFeature=" + secretFeature + ", available="
+        + available + ", brand=" + brand + ", color=" + color + ", engine=" + engine + ", firstReleaseDate="
+        + firstReleaseDate + ", price=" + price + ", tires=" + tires + ", type=" + type + "]";
   }
+
+
+
+
 
 
 }
