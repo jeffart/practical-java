@@ -9,17 +9,10 @@ import org.springframework.data.elasticsearch.client.ClientConfiguration;
 import org.springframework.data.elasticsearch.client.RestClients;
 import org.springframework.data.elasticsearch.config.AbstractElasticsearchConfiguration;
 
-/**
- * @author Intro
- *
- */
 
 @Configuration
 public class ElasticsearchConfig extends AbstractElasticsearchConfiguration{
 
-  /* (non-Javadoc)
-   * @see org.springframework.data.elasticsearch.config.AbstractElasticsearchConfiguration#elasticsearchClient()
-   */
   @Override
   public RestHighLevelClient elasticsearchClient() {
 

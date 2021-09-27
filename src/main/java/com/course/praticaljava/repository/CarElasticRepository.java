@@ -8,10 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.course.praticaljava.entity.Car;
 
-/**
- * @author Intro
- *
- */
+
 @Repository
 public interface CarElasticRepository extends ElasticsearchRepository<Car, String>{
 

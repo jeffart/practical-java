@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.course.praticaljava.common;
 
 import java.util.ArrayList;
@@ -18,41 +15,39 @@ import com.course.praticaljava.entity.Car;
 import com.course.praticaljava.repository.CarElasticRepository;
 import com.course.praticaljava.service.CarService;
 
-/**
- * @author Intro
- *
- */
 
 @Component
 public class CarElasticDatasource {
 
-  private static final Logger LOG = LoggerFactory.getLogger(CarElasticDatasource.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CarElasticDatasource.class);
 
-  @Autowired
-  private CarElasticRepository carRepository;
+	@Autowired
+	private CarElasticRepository carRepository;
 
-  @Autowired
-  @Qualifier("randomCarService")
-  private CarService carService;
+	@Autowired
+	@Qualifier("randomCarService")
+	private CarService carService;
 
-  @Autowired
-  @Qualifier("webClientElasticsearch")
-  private WebClient webClient;
+	@Autowired
+	@Qualifier("webClientElasticsearch")
+	private WebClient webClient;
+	
 
-  @EventListener(ApplicationReadyEvent.class)
-  public void populateData() {
-    var response = webClient.delete().uri("/practical-java").retrieve().bodyToMono(String.class).block();
-    LOG.info("End delete with response {}", response);
+	@EventListener(ApplicationReadyEvent.class)
+	public void populateData() {
+		
+		
+		var response = webClient.delete().uri("/practical-java").retrieve().bodyToMono(String.class).block();
+		LOG.info("End delete with response {}", response);
 
-    var cars = new ArrayList<Car>();
+		var cars = new ArrayList<Car>();
 
-    for (int i = 0; i < 10_000; i++) {
-      cars.add(carService.generateCar());
-    }
+		for (int i = 0; i < 10_000; i++) {
+			cars.add(carService.generateCar());
+		}
 
-    carRepository.saveAll(cars);
+		carRepository.saveAll(cars);
 
-    LOG.info("Saved {} cars", carRepository.count());
-  }
-
+		LOG.info("Saved {} cars", carRepository.count());
+	}
 }
