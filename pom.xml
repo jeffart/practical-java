@@ -67,7 +67,11 @@
 		    <artifactId>micrometer-registry-elastic</artifactId>
 		    <version>1.5.2</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
-		
+		<dependency>
+		    <groupId>org.springdoc</groupId>
+		    <artifactId>springdoc-openapi-webflux-ui</artifactId>
+		    <version>1.5.10</version>
+		</dependency>
 	</dependencies>
 	
 	
